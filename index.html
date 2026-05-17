@@ -178,7 +178,7 @@ function copy(text){
 function render(list){
     output.innerHTML="";
 
-    list.forEach((id,i)=>{
+    list.forEach((id,index)=>{
         const card=document.createElement("div");
         card.className="card";
 
@@ -186,12 +186,29 @@ function render(list){
         <div class="line" style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
             <div style="flex:1;cursor:pointer;" onclick="copy('${id}')">
                 <span class="label">UUID:</span>
-                <span class="value uuid">${id}</span>
+                <span class="value uuid" id="u${index}"></span>
             </div>
             <div class="copySingle" onclick="copy('${id}')">copy</div>
         </div>
         `;
-      output.appendChild(card);
+
+        output.appendChild(card);
+
+        const target=document.getElementById(`u${index}`);
+
+        let i=0;
+
+        function typeChar(){
+            if(i < id.length){
+                target.textContent += id[i];
+                i++;
+                setTimeout(typeChar, 8);
+            }
+        }
+
+        setTimeout(()=>{
+            typeChar();
+        }, index * 120);
     });
 }
 
