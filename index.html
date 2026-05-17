@@ -63,9 +63,9 @@ body{
 }
 .loader{
     position:absolute;
-    top:50%;
+    top:18%;
     left:50%;
-    transform:translate(-50%, -120px);
+    transform:translateX(-50%);
     font-family:monospace;
     font-size:11px;
     letter-spacing:4px;
@@ -73,6 +73,10 @@ body{
     opacity:.72;
     pointer-events:none;
     text-transform:uppercase;
+    user-select:none;
+    display:flex;
+    align-items:center;
+    gap:6px;
 }
 .topbar{
     position:fixed;
@@ -120,6 +124,22 @@ input[type="number"]{
 .copySingle:hover{
     color:#fff;
 }
+    .dots span{
+    animation:blinkDots 1.2s infinite;
+}
+
+.dots span:nth-child(2){
+    animation-delay:0.2s;
+}
+.dots span:nth-child(3){
+    animation-delay:0.4s;
+}
+
+@keyframes blinkDots{
+    0%, 20%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;}
+}
 </style>
 </head>
 
@@ -130,7 +150,9 @@ input[type="number"]{
 <div class="wrapper">
 
     <div class="loader" id="loader">
-        GENERATING<span style="animation:blink .9s infinite;">.</span>
+        GENERATING <span class="dots">
+    <span>.</span><span>.</span><span>.</span>
+</span>
     </div>
 
     <div class="output" id="output"></div>
